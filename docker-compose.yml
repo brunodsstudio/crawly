@@ -1,0 +1,57 @@
+version: '3'
+
+networks:
+  web_network:
+    attachable: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
+          ip_range: 172.20.5.0/24
+          gateway: 172.20.0.1
+
+services:
+  composer:
+    image: composer:1.9.3
+    environment:
+      - COMPOSER_CACHE_DIR=/app/var/cache/composer
+    volumes:
+      - .:/app
+    restart: "no"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  php:
+    image: php:8.1-rc-cli-alpine
+    restart: "no"
+    volumes:
+      - .:/app
+    working_dir: /app
+    networks:
+      - web_network
+  phpunit:
+    image: php:8.1-rc-cli-alpine
+    restart: "no"
+    volumes:
+      - .:/app
+    working_dir: /app
+    entrypoint: vendor/bin/phpunit
+    networks:
+      - web_network
+  fpm:
+    image: php:8.1-rc-fpm-alpine
+    restart: always
+    volumes:
+      - .:/app
+    networks:
+      - web_network
+  nginx:
+    image: nginx:1.17.8-alpine
+    ports:
+      - 8080:80
+    volumes:
+      - .:/app
+      - ./var/log/nginx:/var/log/nginx
+      - .conf/nginx/site.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      web_network:
+        ipv4_address: 172.20.5.2
