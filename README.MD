@@ -3,12 +3,12 @@ Crawly é um aplicativo criado em PHP / COMPOSER / PHPUNIT<br> &
 <a href="https://github.com/FriendsOfPHP/Goutte">ROBOT - Goutte</a>
 
 ##Link para download de toda a aplicação [inclue a pasta VENDOR/NODEMODULES]
-
+<a href="https://we.tl/t-yDHAtd6DwA">Link</a>
 
 ## rodar o docker
 docker-compose up
 
-## instalação
+## instalaçãos
 docker-compose run composer install<br/>
 docker-compose run composer dump-autoload<br/>
 
