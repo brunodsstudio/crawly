@@ -25,7 +25,7 @@ class CrawlyTest extends TestCase
        $token = "0ddb75d9c22105d699746c4d48819166";
 
        $curl = new Curl();
-       $curl->setUrl('http://172.20.5.2/')
+       $curl->setUrl('http://172.20.5.2/api.php')
             ->setData('&processToken='.$token)
             ->setType('POST');
         $curl->send();
@@ -41,19 +41,18 @@ class CrawlyTest extends TestCase
         $token = "";
 
        $curl = new Curl();
-       $curl->setUrl('http://172.20.5.2/')
+       $curl->setUrl('http://172.20.5.2/api.php')
             ->setData('&processToken='.$token)
             ->setType('POST');
         $curl->send();
   
-
      $this->assertEquals(400, $curl->getStatusCode());
        
     }
     public function test_answer()
     {
         $curl = new Curl();
-        $curl->setUrl('http://172.20.5.2/')
+        $curl->setUrl('http://172.20.5.2/api.php')
             ->setType('GET');
         $curl->send();
   

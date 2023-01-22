@@ -1,0 +1,13 @@
+*{
+    font-size: 15pt;
+    font-weight: bolder;
+}
+
+a{
+    font-size: 12pt;
+}
+
+span {
+    font-size: 15pt;
+    color: green;
+}

@@ -67,7 +67,7 @@ class Crawly {
             curl_close ($ch);
         
             $resposta = preg_replace("/.*>([^;]*)<.*/", "\\1", $output);
-            return $output. "\n";
+            return array($output,$values['token'], $this->processToken($values['token']));
 
     }
 
